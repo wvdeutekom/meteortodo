@@ -60,7 +60,6 @@ form {
 
 .new-task input:focus{
   outline: 0;
-  border: dashed;
 }
 
 ul {

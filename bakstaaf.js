@@ -1,4 +1,4 @@
-Tasks = new Mongo.Collection("tasks");
+Tasks = new Mongo.Collection("tasks2");
 
 if (Meteor.isClient) {
   Template.body.helpers({
@@ -9,7 +9,7 @@ if (Meteor.isClient) {
 
   });
 
-  Template.hello.greeting = "Hello world!";
+ // Template.hello.greeting = "Hello world!";
 
   Template.body.events({
     "submit .new-task": function (event) {
@@ -27,6 +27,16 @@ if (Meteor.isClient) {
       return false;
     }
   });
+
+  Template.task.events({
+  "click .toggle-checked": function () {
+    // Set the checked property to the opposite of its current value
+    Tasks.update(this._id, {$set: {checked: ! this.checked}});
+  },
+  "click .delete": function () {
+    Tasks.remove(this._id);
+  }
+});
 }
 
 if (Meteor.isServer) {
